@@ -1,4 +1,5 @@
 #!/bin/bash
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 # check if requirements are met, else exit 
 command_exists() {
@@ -17,7 +18,7 @@ elif  ! command_exists "mpv"  ; then
 fi
 
 
-file_path="./links.txt"
+file_path="$SCRIPT_DIR/links.txt"
 
 mapfile -t links < "$file_path"
 
@@ -28,3 +29,5 @@ working_dir=$(pwd)
 
 kitty mpv --quiet --vo=kitty --no-osc --volume=20  --ytdl-raw-options=match-filter="uploader_id ~= '.*(redvelvet|SMTOWN|wendy_offcl).*' & title ~= '(?i)(irene|seulgi|wendy|joy|yeri|red\\ velvet)' " $random_link
 #kitty $working_dir/play_video.sh $random_link
+
+read
